@@ -12,7 +12,13 @@ class CustomeradressController extends Controller
      */
     public function index()
     {
-        //
+        $payment = Payment::all();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Payment List.",
+            "data" => $payment
+        ]);
     }
 
     /**
