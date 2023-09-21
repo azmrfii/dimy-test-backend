@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerRequest;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -12,7 +14,13 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::all();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer List.",
+            "data" => $customer
+        ]);
     }
 
     /**
@@ -26,17 +34,29 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+        $customer = Customer::create($request->validated());
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer created successfully.",
+            "data" => $customer
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Customer $customer)
     {
-        //
+        $customers = Customer::find($customer);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer Show by Id.",
+            "data" => $customers
+        ]);
     }
 
     /**
@@ -50,16 +70,28 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->validated());
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer updated successfully.",
+            "data" => $customer
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer deleted successfully.",
+            "data" => $customer
+        ]);
     }
 }

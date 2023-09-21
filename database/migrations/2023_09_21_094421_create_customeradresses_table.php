@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('customeradresses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->constrained()->nullable();
+            $table->date('address')->nullable();
             $table->timestamps();
         });
     }
