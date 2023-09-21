@@ -9,6 +9,8 @@ class Customeradress extends Model
 {
     use HasFactory;
 
+    protected $table = 'customeradderesses';
+
     protected $fillable = [
       'customer_id', 'address'  
     ];
